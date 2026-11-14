@@ -23,9 +23,15 @@ while play:
         print(logo.HigherLower)
         if score != 0:
             print(f"You're right! Current score: {score}.")
+<<<<<<< HEAD
         print(f"Against A: {data1["name"]}, a {data1["description"]}, from {data1["country"]}.")
         print(logo.vs)
         print(f"Against B: {data2["name"]}, a {data2["description"]}, from {data2["country"]}.")
+=======
+        print(f"Against A: {data1["name"]}, {data1["description"]}, from {data1["country"]}.")
+        print(logo.vs)
+        print(f"Against B: {data2["name"]}, {data2["description"]}, from {data2["country"]}.")
+>>>>>>> 8c15c7e505b4ac8aeefa3a03176a433780cd7b0c
         ans = input("Who has more followers? Type 'A' or 'B': ").upper()
         result = follower(data1, data2, ans)
         if result[1] == "Correct":
@@ -35,4 +41,8 @@ while play:
             play = False
             print("\n" *20)
             print(logo.HigherLower)
+<<<<<<< HEAD
             print(f"Sorry, that's wrong. Final score: {score}.")
+=======
+            print(f"Sorry, that's wrong. Final score: {score}")
+>>>>>>> 8c15c7e505b4ac8aeefa3a03176a433780cd7b0c
