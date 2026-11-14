@@ -1,27 +1,12 @@
 import CoffeeData
 
 def coffee_resources(user_chosen, resources):
-    if user_chosen == "espresso":
-        for ingredient in menu["espresso"]["ingredients"]:
-            if resources[ingredient] < menu["espresso"]["ingredients"][ingredient]:
-                return ingredient
-        for ingredient in menu["espresso"]["ingredients"]:
-            resources[ingredient] = resources[ingredient] - menu["espresso"]["ingredients"][ingredient]
-        return menu["espresso"]["cost"]
-    elif user_chosen == "latte":
-        for ingredient in menu["latte"]["ingredients"]:
-            if resources[ingredient] < menu["latte"]["ingredients"][ingredient]:
-                return ingredient
-        for ingredient in menu["latte"]["ingredients"]:
-            resources[ingredient] = resources[ingredient] - menu["latte"]["ingredients"][ingredient]
-        return menu["latte"]["cost"]
-    elif user_chosen == "cappuccino":
-        for ingredient in menu["cappuccino"]["ingredients"]:
-            if resources[ingredient] < menu["cappuccino"]["ingredients"][ingredient]:
-                return ingredient
-        for ingredient in menu["cappuccino"]["ingredients"]:
-            resources[ingredient] = resources[ingredient] - menu["cappuccino"]["ingredients"][ingredient]
-        return menu["cappuccino"]["cost"]
+    for ingredient in menu[user_chosen]["ingredients"]:
+        if resources[ingredient] < menu[user_chosen]["ingredients"][ingredient]:
+            return ingredient
+    for ingredient in menu[user_chosen]["ingredients"]:
+        resources[ingredient] = resources[ingredient] - menu[user_chosen]["ingredients"][ingredient]
+    return menu[user_chosen]["cost"]
 
 def transaction(coins, cost):
     for coin in coins:
