@@ -1,67 +1,37 @@
 import random
 
-cards = [11, 2, 3, 4, 5 ,6 ,7, 8 ,9 ,10, 10, 10, 10]
-
-restart = 'y'
-
-def checker(player_com):
-    for c in hands[player_com]:
-        if sum(hands[player_com]) > 21 and c == 11:
-            hands[player_com][hands[player_com].index(c)] = 1
-    if sum(hands[player_com]) > 21 and player_com == "player":
-        return "Player Lose"
-    elif sum(hands[player_com]) > 21 and player_com == "computer":
-        return "Computer Lose"
-
-while restart == 'y':
-    hands = {
-        "player": [],
-        "computer": []
-    }
-    hit = 'y'
-    result = ''
-    computer_card = random.choice(cards)
-    hands["computer"].append(computer_card)
-    while hit == 'y':
-        player_card = random.choice(cards)
-        hands["player"].append(player_card)
-        if sum(hands["player"]) == 21:
-            hit = 'Blackjack'
-        if len(hands["player"]) >= 2 and sum(hands["player"]) != 21:
-            result = checker("player")
-            if result != "Player Lose":
-                print(f"Your cards: {hands["player"]}, current score: {sum(hands["player"])}")
-                print(f"Computer's first card: {hands["computer"][0]}")
-                hit = input("Type 'y' to get another card, type 'n' to pass: ").lower()
-            else:
-                hit = 'went over'
-    while hit == 'n':
-        computer_card = random.choice(cards)
-        hands["computer"].append(computer_card)
-        result = checker("computer")
-        if result != "Computer Lose":
-            r = random.randint(1, 10)
-            if sum(hands["computer"]) > 11 and (r > 10 - sum(hands["computer"]) % 10 or sum(hands["computer"]) >= 20):
-                hit = 'no'
-        else:
-            hit = 'went over'
-
-    print(f"Your final hand: {hands["player"]}, final score: {sum(hands["player"])}")
-    print(f"Computer's final hand: {hands["computer"]}, final score: {sum(hands["computer"])}")
-
-    if result == "Player Lose":
-        print("You went over. You lose 😭")
-    elif result == "Computer Lose":
-        print("Opponent went over. You win 😁")
-    elif sum(hands["computer"]) == 21 and len(hands["computer"]) == 2:
-        print("Lose, opponent has Blackjack 😱")
-    elif sum(hands["player"]) == 21 and len(hands["player"]) == 2:
-        print("Win with a Blackjack 😎")
-    elif sum(hands["computer"]) < sum(hands["player"]):
-        print("You win 😃")
-    elif sum(hands["computer"]) > sum(hands["player"]):
-        print("You lose 😤")
+def game_set(difficulty):
+    if difficulty == 'hard':
+        return 5
+    elif difficulty == 'easy':
+        return 10
     else:
-        print("Draw 🙃")
+        print("Invalid.")
+        return 10
 
-    restart = input("Do you want to play a game of Blackjack? Type 'y' or 'n':").lower()
+def game_process(guess, number):
+    if number == guess:
+        print("Correct.")
+        return 0
+    elif guess > number:
+        print("Too high.")
+    elif guess < number:
+        print("Too low.")
+    if attempts == 1:
+        print(f"You've run out of guesses. It was {number}.")
+    else:
+        print("Guess again.")
+    return attempts - 1
+
+print("Welcome to the Number Guessing Game!")
+print("I'm thinking of a number between 1 and 100.")
+difficulty = input("Choose a difficulty. Type 'easy or 'hard': ").lower()
+attempts = 0
+attempts = game_set(difficulty)
+
+number = random.randint(1, 100)
+
+while attempts:
+    print(f"You have {attempts} attempts remaining to guess the number.")
+    guess = int(input("Make a guess: "))
+    attempts = game_process(guess, number)
